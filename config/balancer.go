@@ -29,17 +29,17 @@ func (b *balancer) incr() {
 }
 
 func (b *balancer) AddNode(id int) {
-	b.Mu.Lock()
+	//b.Mu.Lock()
 	b.Nodes = append(b.Nodes, id)
-	b.Mu.Unlock()
+	//b.Mu.Unlock()
 }
 
 func (b *balancer) RmNode(id int) {
-	b.Mu.Lock()
+	//b.Mu.Lock()
 	for i, node := range b.Nodes {
 		if node == id {
 			b.Nodes = append(b.Nodes[:i], b.Nodes[i+1:]...)
 		}
 	}
-	b.Mu.Unlock()
+	//b.Mu.Unlock()
 }
