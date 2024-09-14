@@ -30,7 +30,7 @@ If your application implies that the topic may be empty or it will not exist, th
 
 ## Configuration
 
-By endpoint /info you will get a json array with all the data in the nodes array from the yml configuration. \nTo add a node to the service, you need to send a json object in the request body: {"id":"n","addr":"ip:host","api_key":"","scheme":""} to endpoint /addnode. To remove node from the service: {"id":"n"} in /rmnode. \nTo add a topic to the service and assign it to a specific node, you need to send a json object in the request body: {"topic":"some_topic","node_id":"existing_node_id"} to endpoint /addtopic. To remove topic from the service: {"topic":"some_topic"} in /rmtopic.
+By endpoint /info you will get a json array with all the data in the nodes array from the yml configuration. \ To add a node to the service, you need to send a json object in the request body: {"id":"n","addr":"ip:host","api_key":"","scheme":""} to endpoint /addnode. To remove node from the service: {"id":"n"} in /rmnode. \ To add a topic to the service and assign it to a specific node, you need to send a json object in the request body: {"topic":"some_topic","node_id":"existing_node_id"} to endpoint /addtopic. To remove topic from the service: {"topic":"some_topic"} in /rmtopic. \
 Authorization token is also required.
 
 ## Node setup
