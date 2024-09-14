@@ -115,7 +115,7 @@ func AddNodeHandler(w http.ResponseWriter, r *http.Request) {
 	config.Cfg.Nodes = append(config.Cfg.Nodes, config.Node{Id: id, Scheme: item.Scheme, APIKey: item.APIKey, IP: item.Addr})
 	config.WriteConfigToYAML(config.Cfg)
 	if config.Cfg.WrongTopic {
-		config.Bal.RmNode(id)
+		config.Bal.AddNode(id)
 	}
 	config.Mu.Unlock()
 
