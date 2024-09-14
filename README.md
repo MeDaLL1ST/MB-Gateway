@@ -4,6 +4,8 @@
 ## Subscribing adding
 
 To send the key to the system, you need to send an http request with JSON of the following type to the endpoint /add: {"key":"some_key","value":"some_value","topic":"some_topic"}. Authorization token in field "Authorization" is required in headers. If there are several topics on different nodes, the request will be sent to all nodes. If the topic is empty or does not exist, then look at the title ## Load balancing.
+<img width="328" alt="image" src="https://github.com/user-attachments/assets/85760289-3cef-47df-95fa-7bbf358e3c62">
+
 
 ## YML
 
