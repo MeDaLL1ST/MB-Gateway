@@ -25,7 +25,7 @@ WORKDIR /root/
 # Копируйте исполняемый файл из предыдущего этапа
 COPY --from=builder /app/main .
 COPY --from=builder /app/mb.yml .
-EXPOSE 8070
-EXPOSE 5137
+EXPOSE 8071
+EXPOSE 5138
 # Команда запуска приложения
 CMD ["./main"]

@@ -23,8 +23,8 @@ func readConfigFromYAML(filename string) error {
 }
 
 func WriteConfigToYAML(config *config) error {
-	Mu.Lock()
-	defer Mu.Unlock()
+	//Mu.Lock()
+	//defer Mu.Unlock()
 	data, err := yaml.Marshal(config)
 	if err != nil {
 		return fmt.Errorf("error marshaling YAML: %v", err)

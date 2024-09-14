@@ -46,8 +46,8 @@ func AddHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	config.Mu.RUnlock()
 	if !existskey && config.Cfg.WrongTopic {
-		send_id := config.Bal.Next()
 		config.Mu.RLock()
+		send_id := config.Bal.Next()
 		for _, node := range config.Cfg.Nodes {
 
 			if send_id == node.Id {
@@ -113,9 +113,11 @@ func AddNodeHandler(w http.ResponseWriter, r *http.Request) {
 
 	config.Mu.Lock()
 	config.Cfg.Nodes = append(config.Cfg.Nodes, config.Node{Id: id, Scheme: item.Scheme, APIKey: item.APIKey, IP: item.Addr})
-	config.Mu.Unlock()
 	config.WriteConfigToYAML(config.Cfg)
-	config.Bal.AddNode(id)
+	if config.Cfg.WrongTopic {
+		config.Bal.RmNode(id)
+	}
+	config.Mu.Unlock()
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(item)
@@ -157,8 +159,8 @@ func AddTopicHandler(w http.ResponseWriter, r *http.Request) {
 
 		}
 	}
-	config.Mu.Unlock()
 	config.WriteConfigToYAML(config.Cfg)
+	config.Mu.Unlock()
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(item)
@@ -192,9 +194,11 @@ func RmNodeHandler(w http.ResponseWriter, r *http.Request) {
 			config.Cfg.Nodes = append(config.Cfg.Nodes[:i], config.Cfg.Nodes[i+1:]...)
 		}
 	}
-	config.Mu.Unlock()
 	config.WriteConfigToYAML(config.Cfg)
-	config.Bal.RmNode(id)
+	if config.Cfg.WrongTopic {
+		config.Bal.RmNode(id)
+	}
+	config.Mu.Unlock()
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(item)
 }
@@ -224,8 +228,8 @@ func RmTopicHandler(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
-	config.Mu.Unlock()
 	config.WriteConfigToYAML(config.Cfg)
+	config.Mu.Unlock()
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(item)
 }
