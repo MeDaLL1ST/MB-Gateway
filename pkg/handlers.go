@@ -222,9 +222,9 @@ func RmTopicHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	config.Mu.Lock()
 	for i, node := range config.Cfg.Nodes {
-		for _, top := range node.Topics {
+		for ti, top := range node.Topics {
 			if item.Topic == top {
-				config.Cfg.Nodes[i].Topics = append(config.Cfg.Nodes[i].Topics[:i], config.Cfg.Nodes[i].Topics[i+1:]...)
+				config.Cfg.Nodes[i].Topics = append(config.Cfg.Nodes[i].Topics[:ti], config.Cfg.Nodes[i].Topics[ti+1:]...)
 			}
 		}
 	}
