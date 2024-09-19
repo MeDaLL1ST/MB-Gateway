@@ -177,6 +177,10 @@ func RmNodeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	go metrics.Incr()
+	if len(config.Cfg.Nodes) == 1 {
+		http.Error(w, "At least one node must remain in the system", http.StatusBadRequest)
+		return
+	}
 	var item RmNodeItem
 	err := json.NewDecoder(r.Body).Decode(&item)
 	if err != nil {
